@@ -1,12 +1,25 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequest } from "../utils/requestSlice";
+import { addRequest, removeRequest } from "../utils/requestSlice";
 
 const Requests = () => {
   const dispatch = useDispatch();
   const requests = useSelector((store) => store.request);
+
+  const reviewRequest = async (status, _id) => {
+    try {
+      const res = axios.post(
+        BASE_URL + "/request/review/" + status + "/" + _id,
+        {},
+        { withCredentials: true }
+      );
+
+      dispatch(removeRequest(_id));
+
+    } catch (err) {}
+  };
 
   const fetchRequests = async () => {
     try {
@@ -28,7 +41,7 @@ const Requests = () => {
 
   if (requests.length === 0) {
     return (
-      <h1 className="text-xl text-center text-white font-bold mt-10 sm:text-4xl">
+      <h1 className="text-xl text-center justify-center text-white font-bold mt-10 sm:text-4xl">
         No Requests Found.
       </h1>
     );
@@ -69,10 +82,22 @@ const Requests = () => {
                   {skills && <p className="text-sm">{skills.join(" , ")}</p>}
                 </div>
               </div>
-              <div className="flex w-full -mt-4 justify-around px-4">
-                <button className="btn btn-error w-1/2">Reject</button>
-                <button className="btn btn-success w-1/2">Accept</button>
-              </div>
+              { (
+                <div className="flex w-full -mt-4 justify-around px-4">
+                  <button
+                    className="btn btn-error w-1/2"
+                    onClick={() => reviewRequest("rejected", request._id)}
+                  >
+                    Reject
+                  </button>
+                  <button
+                    className="btn btn-success w-1/2"
+                    onClick={() => reviewRequest("accepted", request._id)}
+                  >
+                    Accept
+                  </button>
+                </div>
+              )}
             </>
           );
         })}
