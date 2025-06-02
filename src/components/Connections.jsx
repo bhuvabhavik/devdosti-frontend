@@ -38,7 +38,8 @@ const Connections = () => {
           const { firstName, lastName, age, about, photoUrl, skills, gender } =
             connection;
           return (
-            <div className="flex m-4 p-4 rounded-sm bg-base-300 ">
+
+            <div className="flex m-4 p-4 rounded-sm bg-base-300 " key={connection._id}>
               <div className="mx-2">
                 <img
                   alt="photo"
