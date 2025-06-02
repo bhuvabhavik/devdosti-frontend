@@ -1,19 +1,45 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
+import { removeUser } from "../utils/userSlice";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+   
+  
+
+  const handleLogout = async () => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/logout",
+        {},
+        { withCredentials: true }
+      );
+      if (res.status === 200) {
+        dispatch(removeUser()); // remove user from redux store
+        return navigate("/login");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="navbar bg-base-300  shadow-sm">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-2xl">👩🏻‍💻 DevDosti</Link>
+        <Link to="/" className="btn btn-ghost text-2xl">
+          👩🏻‍💻 DevDosti
+        </Link>
       </div>
-       {user && (
-       <div className="flex gap-2">
-       <div className="flex px-4 items-center">{"Welcome, "+ user.firstName}</div>
+      {user && (
+        <div className="flex gap-2">
+          <div className="flex px-4 items-center">
+            {"Welcome, " + user.firstName}
+          </div>
           <div className="dropdown dropdown-end">
-          
             <div
               tabIndex={0}
               role="button"
@@ -37,13 +63,12 @@ const NavBar = () => {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <Link onClick={handleLogout}>Logout</Link>
               </li>
             </ul>
           </div>
-       
-      </div>
-       )}
+        </div>
+      )}
     </div>
   );
 };
