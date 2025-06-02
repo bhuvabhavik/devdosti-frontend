@@ -29,14 +29,22 @@ const NavBar = () => {
 
   return (
     <div className="navbar bg-base-300  shadow-sm">
-      <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-2xl">
-          👩🏻‍💻 DevDosti
+      {/* <div className="flex-1">
+        <Link to="/" className="btn btn-ghost text-xl sm:text-2xl ml-3">
+         DevDosti
         </Link>
-      </div>
+      </div> */}
+      <div className="flex-1">
+  <Link 
+    to="/" 
+    className="text-2xl sm:text-3xl ml-3 font-extrabold tracking-tight bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 text-transparent bg-clip-text hover:from-purple-500 hover:to-orange-500 transition-all duration-300"
+  >
+    Dev<span className="text-white"> Dosti</span>
+  </Link>
+</div>
       {user && (
-        <div className="flex gap-2">
-          <div className="flex px-4 items-center">
+        <div className="flex gap-1">
+          <div className="text-sm sm:text-lg flex items-center px-4 items-right">
             {"Welcome, " + user.firstName}
           </div>
           <div className="dropdown dropdown-end">

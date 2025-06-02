@@ -24,15 +24,15 @@ const Connections = () => {
   if (connections.length === 0) {
     return (
       <h1 className="text-xl text-center text-white font-bold mt-10 sm:text-4xl">
-        No Connections Found.
+        No Dost Found.
       </h1>
     );
   }
 
   return (
     connections && ( 
-      <div className="flex flex-col justify-center my-10 mx-auto sm:w-1/2">
-        <h1 className="text-xl sm:text-4xl text-center">Connections</h1>
+      <div className="pb-25 flex flex-col justify-center my-10 mx-auto sm:w-1/2">
+        <h1 className="text-xl sm:text-4xl text-center">All Dosts</h1>
 
         {connections.map((connection) => {
           const { firstName, lastName, age, about, photoUrl, skills, gender } =
