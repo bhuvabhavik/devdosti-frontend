@@ -13,7 +13,9 @@ const UserCard = ({ user }) => {
           <h2 className="card-title">{firstName + " " + lastName}</h2>
           <p>{about}</p>
           <p>{age + " "+ gender}</p>
-          {/* <p>{skills.seperatedBy(",")}</p> */}
+       <p>{skills && skills.length > 0 ? skills.join(", ") : "No skills mentioned"}</p>
+         
+          
           <div className="card-actions justify-center m-4">
             <button className="btn bg-red-600 ">Ignore</button>
             <button className="btn bg-green-600">Interested</button>
