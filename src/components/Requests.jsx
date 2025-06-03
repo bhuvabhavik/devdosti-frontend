@@ -53,7 +53,7 @@ const Requests = () => {
         <h1 className="text-xl sm:text-4xl text-center">
           Pending Dosti Requests
         </h1>
-        {console.log(requests)}
+        {/* {console.log(requests)} */}
         {requests.map((request) => {
           const { firstName, lastName, age, about, photoUrl, skills, gender } =
             request.fromUserId;

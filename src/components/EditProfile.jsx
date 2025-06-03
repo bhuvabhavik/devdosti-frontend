@@ -9,7 +9,7 @@ const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-  const [age, setAge] = useState(user.age);
+  const [age, setAge] = useState(user.age || "");
   const [skills, setSkills] = useState(user.skills);
   const [gender, setGender] = useState(user.gender);
   const [about, setAbout] = useState(user.about);
@@ -27,7 +27,7 @@ const EditProfile = ({ user }) => {
         { firstName, lastName, photoUrl, age, gender, about, skills },
         { withCredentials: true }
       );
-      console.log(res);
+      // console.log(res);
       dispatch(addUser(res?.data?.data)); // update the store with new user
       setShowToast(true);
       setTimeout(()=>{
@@ -147,7 +147,7 @@ const EditProfile = ({ user }) => {
     rows={3}
     maxLength={120}
   />
-  <p className="text-sm text-right text-gray-500">{about.length}/120 characters</p>
+  <p className="text-sm text-right text-gray-500">{about.length??0}/80 characters</p>
 </fieldset>
 
               {/* <fieldset className="fieldset">

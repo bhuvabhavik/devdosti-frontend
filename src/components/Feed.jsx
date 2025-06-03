@@ -11,15 +11,15 @@ const Feed = () => {
 // console.log(feed);
 
   const getFeed = async () => {
-    if (feed) {
+    if (!feed) {
       return;
     }
     try {
       const res = await axios.get(BASE_URL + "/user/feed", {
         withCredentials: true,
       });
-
-      dispatch(addFeed(res?.data));
+      // console.log("Feed data from API:", res?.data?.data); // 🔍 Add this
+      dispatch(addFeed(res?.data?.data));
     } catch (err) {
       console.log(err);
     }
@@ -29,13 +29,25 @@ const Feed = () => {
     getFeed();
   }, []);
 
-  return (
-    feed && (
-      <div className="flex justify-center my-10">
-        <UserCard user={feed.data[0]} />
-      </div>
-    )
-  );
+  // return (
+  //   feed && (
+  //     <div className="flex justify-center my-10">
+  //       <UserCard user={feed.data[0]} />
+  //     </div>
+  //   )
+  // );
+
+
+
+return (
+  <div className="flex justify-center my-10">
+   {Array.isArray(feed) && feed.length > 0 ? (
+  <UserCard user={feed[0]} />
+) : (
+  <div className="text-center text-gray-500">No More Dosts Around!</div>
+)}
+  </div>
+);
 };
 
 export default Feed;
