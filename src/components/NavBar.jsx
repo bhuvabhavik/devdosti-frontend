@@ -67,12 +67,16 @@ const NavBar = () => {
                   <span className="badge">New</span>
                 </Link>
               </li>
+                <li>
+                <Link to={"/premium"}>BUY Premium <span className="badge">New</span></Link>
+              </li>
               <li>
                 <Link to={"/connections"}>Dosts</Link>
               </li>
                <li>
                 <Link to={"/request"}>Request for Dosti</Link>
               </li>
+             
               <li>
                 <Link onClick={handleLogout}>Logout</Link>
               </li>
